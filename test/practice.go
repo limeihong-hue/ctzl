@@ -12,3 +12,12 @@ func Practice1() {
 		fmt.Printf("Element[%d] = %d\n", j, n[j])
 	}
 }
+
+func Digui(n int) int {
+
+	if n > 0 {
+		return n * Digui(n-1)
+	}
+
+	return 1
+}
