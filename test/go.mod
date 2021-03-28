@@ -1,3 +1,3 @@
-module test
+module ctzl/test
 
 go 1.16

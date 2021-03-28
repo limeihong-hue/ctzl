@@ -1,10 +1,33 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"ctzl/test/interview"
+
+	_ "errors"
+	"flag"
+)
+
+func init() {
+	fmt.Println("2")
+}
+
+func init() {
+	fmt.Println("1")
+	flag.StringVar(&name, "name", "everyone", "The greeting object.")
+}
+
+var name string
 
 func main() {
 	var n [10]int
 	var i, j int
+
+	flag.Parse()
+
+	fmt.Println("name=%s", name)
+
 	for i = 0; i < 10; i++ {
 		n[i] = i + 100
 	}
@@ -12,7 +35,19 @@ func main() {
 		fmt.Printf("Element[%d] = %d\n", j, n[j])
 	}
 
-	Interview1()
+	interview.Interview1()
 
 	Practice1()
+
+	interview.Interview2()
+
+	interview.Interview12()
+
+	interview.Interview14()
+
+	interview.Interview17()
+
+	interview.Interview24()
+
+	interview.Interview25()
 }
