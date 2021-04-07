@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"ctzl/test/interview"
+	"github.com/limeihong-hue/ctzl/test/interview"
 
 	_ "errors"
 	"flag"
@@ -50,4 +50,18 @@ func main() {
 	interview.Interview24()
 
 	interview.Interview25()
+
+	interview.Interview_24()
+
+	interview.Interview26()
+	interview.Interview27()
+
+	interview.Interview28()
+	interview.Interview30()
+
+	interview.Interview44()
+	interview.Interview45()
+
+	interview.Interview47()
+	interview.Interview48()
 }
