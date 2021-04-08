@@ -300,3 +300,10 @@ func Interview48() {
 	f()
 	fmt.Println("M")
 }
+
+func f1() (r int) {
+	defer func() {
+		r++
+	}()
+	return 0
+}
