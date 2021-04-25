@@ -1,6 +1,10 @@
 package interview
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+	"time"
+)
 
 func init() {
 	fmt.Println("0")
@@ -78,7 +82,7 @@ func Interview17() {
 		fmt.Println("nil")
 	} else {
 		fmt.Println("not nil")
-		fmt.Println("hello() %v", h())
+		fmt.Println("hello() v", h())
 	}
 
 }
@@ -224,16 +228,16 @@ func Interview34() {
 func increaseA() int {
 	var i int
 	defer func() {
-		i++
+		i = i + 1
 	}()
-	return i
+	return 1
 }
 
 func increaseB() (r int) {
 	defer func() {
 		r++
 	}()
-	return r
+	return 0
 }
 
 func Interview44() {
@@ -291,19 +295,408 @@ func Interview47() {
 	person.age = 29
 }
 
-func f() {
-	defer fmt.Println("D")
-	fmt.Println("F")
-}
-
-func Interview48() {
-	f()
-	fmt.Println("M")
-}
-
+/*
 func f1() (r int) {
+    defer func() {
+        r++
+    }()
+    return 0
+}
+
+func f2() (r int) {
+    t := 5
+    defer func() {
+        t = t + 5
+    }()
+    return t
+}
+
+func f3() (r int) {
+    defer func(r int) {
+        r = r + 5
+    }(r)
+    return 1
+}
+func Interview41() {
+
+	fmt.Println(f1)
+}
+*/
+
+func Interview41() {
+	var m map[string]int = make(map[string]int) //A
+	m["a"] = 1
+	if v := m["b"]; v != 0 { //B
+		fmt.Println(v)
+	}
+}
+func f1() (r int) {
+
 	defer func() {
 		r++
 	}()
 	return 0
+}
+func f2() (r int) {
+	t := 5
+	defer func() {
+		t = t + 5
+	}()
+	return t
+}
+func f3() (r int) {
+	defer func(r int) {
+		r = r + 5
+	}(r)
+	return 1
+}
+func Interview46() {
+	fmt.Println(f1())
+	fmt.Println(f2())
+	fmt.Println(f3())
+
+}
+func Interview55() {
+
+	s1 := []int{1, 2, 3}
+	s2 := s1[1:]
+	s2[1] = 4
+	fmt.Println(s1)
+	s2 = append(s2, 5, 6, 7)
+	fmt.Println(s1)
+}
+func Interview56() {
+	if a := 1; false {
+	} else if b := 2; false {
+	} else {
+		println(a, b)
+	}
+}
+func Interview58() {
+	a := 1
+	b := 2
+	defer calc("1", a, calc("10", a, b))
+	a = 0
+	defer calc("2", a, calc("20", a, b))
+	b = 1
+}
+
+func calc(index string, a, b int) int {
+	ret := a + b
+	fmt.Println(index, a, b, ret)
+	return ret
+}
+
+type People1 interface {
+	Speak1(string) string
+}
+type Student struct{}
+
+func (stu Student) Speak1(think string) (talk string) {
+	if think == "speak" {
+		talk = "speak"
+	} else {
+		talk = "hi"
+	}
+	return
+}
+
+func Interview60() {
+	var peo People1 = Student{}
+	_ = peo
+	think := "speak"
+	fmt.Println(peo.Speak1(think))
+}
+
+type Direction int
+
+const (
+	North Direction = iota
+	East
+	South
+	West
+)
+
+func (d Direction) String() string {
+	return [...]string{"North", "East", "South", "West"}[d]
+}
+
+func Interview63() {
+	fmt.Println(South)
+}
+
+type People11 interface {
+	Show11()
+}
+
+type Student11 struct{}
+
+func (stu *Student11) Show11() {
+
+}
+
+type Student21 struct{}
+
+func Interview62() {
+	/*
+		var s *Student11 //= new(Student11)
+		if s == nil {
+			fmt.Println("s is nil")
+		} else {
+			fmt.Println("s is not nil")
+		}
+
+		var p People11 = s
+		//p := s
+		if p == nil {
+			fmt.Println("p is nil")
+		} else {
+			fmt.Println("p is not nil")
+		}
+	*/
+
+	var s2 *Student21
+	_ = s2
+
+	//var p2 interface = s2
+
+	var age int = 5
+	_ = age
+
+	var s *Student11
+	if s == nil {
+		fmt.Println("s is nil")
+	} else {
+		fmt.Println("s is not nil")
+	}
+	var p People11 = s
+	//p = 1
+	//p = "strintg"
+
+	if p == nil {
+		fmt.Println("p is nil")
+	} else {
+		fmt.Println("p is not nil")
+	}
+}
+
+/*func Interview68() {
+
+    var m = [...]int{1, 2, 3}
+
+    for i, v := range m {
+        go func() {
+            fmt.Println(i, v)
+        }()
+    }
+
+    time.Sleep(time.Second * 3)
+}
+*/
+
+type I1 interface {
+	One()
+}
+type S1 struct {
+	I1
+	num int
+}
+
+func (s1 *S1) One() {
+	fmt.Printf("type: S1  value: %+v interface One \n", s1.num)
+}
+
+type I2 interface {
+	Two()
+}
+type I12 interface {
+	I1
+	I2
+}
+type S12 struct {
+	I12
+	num int
+}
+
+func (s12 *S12) Two() {
+	fmt.Printf("type: S12  value: %+v interface Two \n", s12.num)
+}
+
+func InterviewXX() {
+	var x I1
+	s1 := new(S1) //&S1{num: 1}
+	s12 := &S12{num: 12}
+	_ = s12
+
+	x = s1
+	fmt.Printf("1: %T\n", x)             // 1: *main.S1
+	fmt.Println("2:", reflect.TypeOf(x)) //2: *main.S1
+}
+
+type Math struct {
+	x, y int
+}
+
+var m = map[string]Math{
+	"foo": Math{2, 3},
+}
+
+func Interview64() {
+	tmp := m["foo"]
+	tmp.x = 4
+	m["foo"] = tmp
+	fmt.Println(m["foo"].x)
+}
+
+var p1 *int
+
+func foo() (*int, error) {
+	var i int = 5
+	return &i, nil
+}
+
+func bar() {
+	//use p
+	fmt.Println(*p1)
+}
+
+func Interview66() {
+	var err error
+	p1, err = foo()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	bar()
+	fmt.Println(*p1)
+}
+func Interview67() {
+	fmt.Println("Interview67")
+	v := []int{1, 2, 3}
+	for i, k := range v {
+		if i == 0 {
+			v[2] = 100
+			v[1] = 200
+		}
+		fmt.Println("i %d …%d", i, k)
+		v = append(v, i)
+	}
+	fmt.Println("Interview67 end")
+}
+
+func Interview68() {
+	var m = [...]int{1, 2, 3}
+
+	for i, v := range m {
+		go func() {
+			fmt.Println(i, v)
+		}()
+	}
+
+	time.Sleep(time.Second * 3)
+}
+func f(n int) (r int) {
+	defer func() {
+		r += n
+		recover()
+	}()
+
+	var f func()
+
+	if f == nil {
+		dd := 1
+		_ = dd
+	}
+	defer f()
+	f = func() {
+		r += 2
+	}
+	//r = n + 1
+	return n + 1
+}
+
+func Interview69() {
+	fmt.Println(f(3))
+}
+func Interview70() {
+	var a = [5]int{1, 2, 3, 4, 5}
+	var r [5]int
+
+	for i, v := range a {
+		if i == 0 {
+			a[1] = 12
+			a[2] = 13
+		}
+		r[i] = v
+	}
+	fmt.Println("r = ", r)
+	fmt.Println("a = ", a)
+}
+func change(s ...int) {
+	s = append(s, 3)
+}
+
+func Interview71() {
+	slice := make([]int, 5, 5)
+	slice[0] = 1
+	slice[1] = 2
+	change(slice...)
+	fmt.Println(slice)
+	change(slice[0:2]...)
+	fmt.Println(slice)
+}
+func Interview72() {
+	var a = []int{1, 2, 3, 4, 5}
+	var r [5]int
+
+	for i, v := range a {
+		if i == 0 {
+			a[1] = 12
+			a[2] = 13
+		}
+		r[i] = v
+	}
+	fmt.Println("r = ", r)
+	fmt.Println("a = ", a)
+}
+
+type Foo struct {
+	bar string
+}
+
+func Interview73() {
+	s1 := []Foo{
+		{"A"},
+		{"B"},
+		{"C"},
+	}
+	s2 := make([]*Foo, len(s1))
+	for i, value := range s1 {
+		s2[i] = &value
+	}
+	fmt.Println(s1[0], s1[1], s1[2])
+	fmt.Println(s2[0], s2[1], s2[2])
+}
+func Interview74() {
+
+	var m = map[string]int{
+		"A": 21,
+		"B": 22,
+		"C": 23,
+	}
+	counter := 0
+	for k, v := range m {
+		if counter == 0 {
+			delete(m, "A")
+		}
+		counter++
+		fmt.Println(k, v)
+	}
+	fmt.Println("counter is ", counter)
+}
+func Interview77() {
+	i := 1
+	s := []string{"A", "B", "C"}
+	i, s[i-1] = 2, "Z"
+	fmt.Printf("s: %v \n", s)
 }
