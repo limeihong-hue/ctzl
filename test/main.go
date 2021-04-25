@@ -33,38 +33,6 @@ func main() {
 	}
 	for j = 0; j < 10; j++ {
 		fmt.Printf("Element[%d] = %d\n", j, n[j])
-		}
-
-	interview.Interview1()
-
-	Practice1()
-
-	interview.Interview2()
-
-	interview.Interview12()
-
-	interview.Interview14()
-
-	interview.Interview17()
-
-	interview.Interview24()
-
-	interview.Interview25()
-
-	interview.Interview_24()
-
-	interview.Interview26()
-	interview.Interview27()
-
-	interview.Interview28()
-	interview.Interview30()
-
-	interview.Interview44()
-	interview.Interview45()
-
-	interview.Interview47()
-	interview.Interview48()2
-}
 	}
 
 	interview.Interview1()
@@ -95,7 +63,27 @@ func main() {
 	interview.Interview45()
 
 	interview.Interview47()
-	interview.Interview48()
-	interview.Interview46()
 
+	interview.Interview41()
+	interview.Interview46()
+	interview.Interview55()
+	interview.Interview56()
+	interview.Interview58()
+	interview.Interview60()
+	interview.Interview63()
+	interview.Interview62()
+
+	interview.InterviewXX()
+	//interview.Interview68()
+	interview.Interview64()
+	interview.Interview66()
+	interview.Interview67()
+	interview.Interview68()
+	interview.Interview69()
+	interview.Interview70()
+	interview.Interview71()
+	interview.Interview72()
+	interview.Interview73()
+	interview.Interview74()
+	interview.Interview77()
 }
